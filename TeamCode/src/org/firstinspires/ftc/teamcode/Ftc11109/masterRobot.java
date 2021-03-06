@@ -59,15 +59,19 @@ import org.firstinspires.ftc.teamcode.Ftc11109.subsystem.Shooter;
 @TeleOp(name = "master", group = "AA 11109")
 public class masterRobot extends OpMode {
     // Declare OpMode members.
-    RingIntake intake;
+//    RingIntake intake;
     Drive Drive;
-    RingTranstition transtition;
-    RingSensors disSensors;
+    //    RingTranstition transtition;
+    //    RingSensors disSensors;
     RobotControls controls;
-    Shooter shooter;
+    //    Shooter shooter;
     IMU imu;
 
+    boolean isShooterOn = false;
+    boolean lastTriggerState = false;
+
     private ElapsedTime runtime = new ElapsedTime();
+    private ElapsedTime controlTime = new ElapsedTime();
 
     @Override
     public void init() {
@@ -107,7 +111,6 @@ public class masterRobot extends OpMode {
     @Override
     public void loop() {
         ////////////drive
-
         Drive.drive(controls.strafe(), controls.forward(), controls.turn(), controls.slowMode(), -imu.getheading(AngleUnit.DEGREES) );
 
 // working robot centric mode
@@ -121,7 +124,7 @@ public class masterRobot extends OpMode {
 //        if (disSensors.isRingInElevator()) {
 //            transtition.doNothingMode();
 //        }
-//
+
 //        if (controls.spitOut()) {
 //            transtition.reverseIntakeTransitionMode();
 //        }
@@ -135,27 +138,38 @@ public class masterRobot extends OpMode {
 //        transtition.runMotors();
 
         /////////////intake
-        if (controls.intake()) {
-            intake.intake();
-        } else if (controls.outtake()) {
-            intake.outtake();
-        } else {
-            intake.doNothing();
-        }
+//        if (controls.intake()) {
+//            intake.intake();
+//        } else if (controls.outtake()) {
+//            intake.outtake();
+//        } else {
+//            intake.doNothing();
+//        }
 
 
         ///////////shooter
-        if (controls.shooterSpinUp()) {
-            shooter.shooterSpinUp();
-        } else {
-            shooter.doNothing();
-        }
-
+//        if (controls.shooterToggle() && !lastTriggerState){
+//            isShooterOn = !isShooterOn;
+//        }
+//        lastTriggerState = controls.shooterToggle();
+//        shooter.setShootOn(isShooterOn);
+//
+//        if (controls.increaseShooterSpeed() && controlTime.milliseconds() > 500){
+//            shooter.increaseSpeed();
+//            controlTime.reset();
+//        }
+//
+//        if (controls.decreaseShooterSpeed() && controlTime.milliseconds() > 500){
+//            shooter.decreaseSpeed();
+//            controlTime.reset();
+//        }
 //        /////////////telemetry
-//        disSensors.telemetry();
-
-        imu.telemetry();
-        telemetry.update();
+////        disSensors.telemetry();
+//        imu.telemetry();
+//        transtition.telemetery();
+//        intake.telemetry();
+//        shooter.telemetry();
+//        telemetry.update();
     }
 
     /*

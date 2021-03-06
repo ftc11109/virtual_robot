@@ -47,14 +47,19 @@ public class MechanumBase extends VirtualBot {
         super.initialize();
         hardwareMap.setActive(true);
         motors = new DcMotorExImpl[]{
-                (DcMotorExImpl) hardwareMap.get(DcMotorEx.class, "back_left_motor"),
-                (DcMotorExImpl) hardwareMap.get(DcMotorEx.class, "front_left_motor"),
-                (DcMotorExImpl) hardwareMap.get(DcMotorEx.class, "front_right_motor"),
-                (DcMotorExImpl) hardwareMap.get(DcMotorEx.class, "back_right_motor")
+                (DcMotorExImpl) hardwareMap.get(DcMotorEx.class, "left_driveB"),
+                (DcMotorExImpl) hardwareMap.get(DcMotorEx.class, "left_driveF"),
+                (DcMotorExImpl) hardwareMap.get(DcMotorEx.class, "right_driveF"),
+                (DcMotorExImpl) hardwareMap.get(DcMotorEx.class, "right_driveB"),
+                (DcMotorExImpl) hardwareMap.get(DcMotorEx.class, "shooter"),
+                (DcMotorExImpl) hardwareMap.get(DcMotorEx.class, "intake_motor"),
+                (DcMotorExImpl) hardwareMap.get(DcMotorEx.class, "eleBeltsRampBelts"),
+                (DcMotorExImpl) hardwareMap.get(DcMotorEx.class, "eleWheelsLowerBelts")
+
         };
         distanceSensors = new VirtualRobotController.DistanceSensorImpl[]{
-                hardwareMap.get(VirtualRobotController.DistanceSensorImpl.class, "front_distance"),
-                hardwareMap.get(VirtualRobotController.DistanceSensorImpl.class, "left_distance"),
+                hardwareMap.get(VirtualRobotController.DistanceSensorImpl.class, "intake_sensor"),
+                hardwareMap.get(VirtualRobotController.DistanceSensorImpl.class, "elevator_sensor"),
                 hardwareMap.get(VirtualRobotController.DistanceSensorImpl.class, "back_distance"),
                 hardwareMap.get(VirtualRobotController.DistanceSensorImpl.class, "right_distance")
         };
@@ -77,9 +82,9 @@ public class MechanumBase extends VirtualBot {
 
     protected void createHardwareMap() {
         hardwareMap = new HardwareMap();
-        String[] motorNames = new String[]{"back_left_motor", "front_left_motor", "front_right_motor", "back_right_motor"};
+        String[] motorNames = new String[]{"left_driveB", "left_driveF", "right_driveF", "right_driveB", "shooter", "intake_motor", "eleBeltsRampBelts", "eleWheelsLowerBelts"};
         for (String name : motorNames) hardwareMap.put(name, new DcMotorExImpl(MOTOR_TYPE));
-        String[] distNames = new String[]{"front_distance", "left_distance", "back_distance", "right_distance"};
+        String[] distNames = new String[]{"intake_sensor", "elevator_sensor", "back_distance", "right_distance"};
         for (String name : distNames) hardwareMap.put(name, controller.new DistanceSensorImpl());
         //hardwareMap.put("gyro_sensor", controller.new GyroSensorImpl());
         hardwareMap.put("imu", new BNO055IMUImpl(this, 10));
